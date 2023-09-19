@@ -1,7 +1,7 @@
 <template>
   <div>
-    <el-container style="height: 500px; border: 1px solid #eee">
-      <el-aside width="200px" style="background-color: rgb(238, 241, 246);height: 100vh">
+    <el-container style="height: 100%; ">
+      <el-aside :width="sideWidth+'px'" style="background-color: rgb(238, 241, 246);height: 100vh">
         <el-menu :default-openeds="['1', '3']" style="min-height: 100%;overflow-x: hidden" background-color="rgb(48,65,86)" text-color="#fff" active-text-color="#ffd04b" :collapse-transition="false" :collapse="isCollapse">
           <div style="height: 60px;line-height: 60px;text-align: center;">
             <img src="../assets/logo.png" style="width:20px ;position: relative;top:5px">
@@ -11,7 +11,10 @@
 
           </div>
           <el-submenu index="1">
-            <template slot="title"><i class="el-icon-message"></i>导航一</template>
+            <template slot="title">
+              <i class="el-icon-message"></i>
+              <span>导航一</span>
+            </template>
             <el-menu-item-group>
               <template slot="title">分组一</template>
               <el-menu-item index="1-1">选项1</el-menu-item>
@@ -26,7 +29,7 @@
             </el-submenu>
           </el-submenu>
           <el-submenu index="2">
-            <template slot="title"><i class="el-icon-menu"></i>导航二</template>
+            <template slot="title"><i class="el-icon-menu"></i><span>导航二</span></template>
             <el-menu-item-group>
               <template slot="title">分组一</template>
               <el-menu-item index="2-1">选项1</el-menu-item>
@@ -41,7 +44,7 @@
             </el-submenu>
           </el-submenu>
           <el-submenu index="3">
-            <template slot="title"><i class="el-icon-setting"></i>导航三</template>
+            <template slot="title"><i class="el-icon-setting"></i><span>导航三</span></template>
             <el-menu-item-group>
               <template slot="title">分组一</template>
               <el-menu-item index="3-1">选项1</el-menu-item>
@@ -59,14 +62,13 @@
       </el-aside>
 
       <el-container>
-        <el-header style="text-align: right; font-size: 12px; border-bottem:1px solid #ccc;line-height: 60px;display: flex ">
+        <el-header style="text-align: left; font-size: 12px; border-bottem:1px solid #ccc;line-height: 60px;display: flex ">
           <div style="flex: 1;font-size: 18px;">
           <span :class="collapseBtnClass" style="cursor: pointer" @click="collapse"></span>
           </div>
-          <el-dropdown style="width: 200px">
+          <el-dropdown style="width: 70px">
             <span>王小虎</span>
             <i class="el-icon-arrow-down"></i>
-            <i class="el-icon-setting" style="margin-right: 15px"></i>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>查看</el-dropdown-item>
               <el-dropdown-item>新增</el-dropdown-item>
@@ -118,9 +120,10 @@ export default {
 
     return{
       msg:"hello banana",
-      tableData: Array(20).fill(item),
+      tableData: Array(10).fill(item),
       collapseBtnClass:'el-icon-s-fold',
-      isCollapse:false
+      isCollapse:false,
+      sideWidth:200
     }
     },
     methods:{
@@ -129,11 +132,14 @@ export default {
         if(this.isCollapse){
           this.sideWidth =64
           this.collapseBtnClass = 'el-icon-s-unfold'
-          this.logloading
+        }else{
+          this.sideWidth =200
+          this.collapseBtnClass ='el-icon-s-fold'
+
+        }
 
         }
 
       }
-    }
     }
 </script>
